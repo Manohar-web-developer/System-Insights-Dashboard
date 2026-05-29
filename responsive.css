@@ -1,0 +1,869 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --bg-color: #040816;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --cyan: #00d9ff;
+    --purple: #7a5cff;
+    --pink: #ff4fd8;
+    --white: #ffffff;
+    --text-light: #bfc7d5;
+    --blur: 20px;
+    --shadow: 0 0 30px rgba(122, 92, 255, .35);
+    --gradient: linear-gradient(135deg, #00d9ff, #7a5cff, #ff4fd8);
+  }
+  
+  body {
+    background: var(--bg-color);
+    color: white;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .bg::before {
+    content: "";
+    display: block;
+    height: 180px;
+    width: 170px;
+    background: var(--cyan);
+    border-radius: 50%;
+    filter: blur(50px);
+    position: absolute;
+    top: 50%;
+    transform: translate(50%, -50%);
+  }
+  
+  .bg::after {
+    content: "";
+    display: block;
+    height: 180px;
+    width: 170px;
+    background: var(--purple);
+    border-radius: 50%;
+    filter: blur(50px);
+    position: absolute;
+    bottom: 50%;
+    right: 10%;
+    transform: translate(50%, -50%);
+  }
+  
+  .card {
+    position: relative;
+    width: 75%;
+    margin: 100px auto;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 50px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(122, 92, 255, .15);
+    border-radius: 50px;
+    overflow: hidden;
+  }
+  
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+  
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 50px;
+    background: conic-gradient(from var(--angle), #00d9ff, #7a5cff, #ff4fd8, #00d9ff);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: moveBorder 4s linear infinite;
+  }
+  
+  @keyframes moveBorder {
+    to { --angle: 360deg; }
+  }
+  
+  /* ─── TOP HEADER ─────────────────────────────── */
+  
+  .top_header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 30px;
+  }
+  
+  .icon {
+    height: 50px;
+    width: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(122, 92, 255, .15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .greet {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .greet_message {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .greet_heading {
+    font-size: 45px;
+    font-weight: 700;
+    background: conic-gradient(from 30deg, #00d9ff, #7a5cff, #ff4fd8);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: moveBorder 4s linear infinite;
+  }
+  
+  .greet_pera {
+    font-size: 20px;
+    color: var(--text-light);
+  }
+  
+  .Outer_status, .status {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .status_icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .active { background-color: green; }
+  .off    { background-color: red; }
+  
+  .status_current {
+    font-size: 23px;
+    color: var(--text-light);
+  }
+  
+  .status {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(122, 92, 255, .15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  
+  .battery {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 40px rgba(122, 92, 255, .15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  
+  /* ─── CARD 2 (CLOCK) ─────────────────────────── */
+  
+  .card2 {
+    position: relative;
+    width: 100%;
+    margin: 30px auto;
+    height: 60%;
+    z-index: 999;
+    padding: 50px;
+    backdrop-filter: blur(20px);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(122, 92, 255, .15);
+    border-radius: 50px;
+    overflow: hidden;
+  }
+  
+  .card2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 50px;
+    background: conic-gradient(from var(--angle), #00d9ff, #7a5cff, #ff4fd8, #00d9ff);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: moveBorder 4s linear infinite;
+  }
+  
+  .date_filter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .current_date {
+    font-size: 28px;
+    color: var(--text-light);
+  }
+  
+  .daystatus { font-size: 18px !important; }
+  
+  .card2_top_heder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .card2_main {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 30px;
+  }
+  
+  .current_time {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 172px;
+  }
+  
+  .sec {
+    font-size: 155px;
+    background: linear-gradient(30deg, #00d9ff, #7a5cff, #ff4fd8);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .AmPm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 35px;
+  }
+  
+  .AmPm h2 {
+    color: rgba(102, 109, 99, 0.411);
+    font-weight: 300;
+    letter-spacing: 8px;
+  }
+  
+  .activeh2 { color: white !important; }
+  
+  /* ─── CARD 3 (WIDGETS GRID) ──────────────────── */
+  
+  .card3 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    background: transparent;
+  }
+  
+  .crd3mini {
+    width: 100%;
+    z-index: 999;
+    padding: 20px 10px;
+    backdrop-filter: blur(20px);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(122, 92, 255, .15);
+    border-radius: 50px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .green  { color: greenyellow; }
+  .yellow { color: rgb(202, 151, 58); }
+  .red    { color: red; }
+  
+  /* ─── BATTERY ────────────────────────────────── */
+  
+  .card3battery > .battery_status { font-size: 28px; }
+  
+  .card3battery {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 30px;
+  }
+  
+  .card3battery1 {
+    font-size: 22px;
+    font-weight: 300;
+  }
+  
+  .battery-ring {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: conic-gradient(#22c55e 78%, rgba(255,255,255,.1) 78%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .battery-inner {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #0b1120;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .charginLevel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+  }
+  
+  .chargingStatus {
+    font-size: 19px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .batteryHealth {
+    color: var(--text-light);
+    font-weight: 300;
+    font-size: 20px;
+  }
+  
+  .innerCharger {
+    font-size: 30px;
+    font-weight: 300;
+  }
+  
+  /* ─── NETWORK ────────────────────────────────── */
+  
+  .net-card {
+    padding: 10px 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  
+  .net-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  
+  .net-header i { font-size: 20px; color: #fff; }
+  
+  .net-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -70px;
+    margin-bottom: 16px;
+  }
+  
+  .net-type {
+    font-size: 46px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  
+  .net-quality {
+    font-size: 18px;
+    padding-top: 10px;
+    color: #8899aa;
+    margin-top: 4px;
+  }
+  
+  .net-status {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #ccc;
+    margin-top: 20px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #7a5cff;
+    flex-shrink: 0;
+  }
+  
+  .net-status2 { font-size: 15px; }
+  
+  /* ─── WEATHER ────────────────────────────────── */
+  
+  .weather-card {
+    padding: 10px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 14px;
+  }
+  
+  .w-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .w-header i { font-size: 20px; }
+  
+  .w-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .w-left { display: flex; flex-direction: column; gap: 8px; }
+  
+  .w-temp {
+    font-size: 54px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  
+  .w-desc { font-size: 15px; color: #8899aa; }
+  
+  .w-icon {
+    position: relative;
+    width: 90px;
+    height: 70px;
+    flex-shrink: 0;
+  }
+  
+  .sun {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #ffe066, #f5a623);
+    top: 2px;
+    right: 8px;
+    box-shadow: 0 0 18px 6px rgba(245,166,35,0.35);
+  }
+  
+  .cloud-back {
+    position: absolute;
+    width: 64px;
+    height: 36px;
+    background: #b0b8d8;
+    border-radius: 50px;
+    bottom: 8px;
+    left: 0;
+    opacity: 0.6;
+  }
+  
+  .cloud-back::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #b0b8d8;
+    border-radius: 50%;
+    top: -14px;
+    left: 12px;
+  }
+  
+  .cloud-front {
+    position: absolute;
+    width: 72px;
+    height: 38px;
+    background: #c8cfe8;
+    border-radius: 50px;
+    bottom: 0;
+    left: 6px;
+  }
+  
+  .cloud-front::before {
+    content: '';
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    background: #c8cfe8;
+    border-radius: 50%;
+    top: -16px;
+    left: 14px;
+  }
+  
+  .cloud-front::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #c8cfe8;
+    border-radius: 50%;
+    top: -10px;
+    left: 36px;
+  }
+  
+  .w-footer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .w-pill-h, .w-pill-l {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #ccd;
+  }
+  
+  .w-city {
+    font-size: 43px;
+    color: #556677;
+    font-weight: 400;
+  }
+  
+  /* ─── LOCATION ───────────────────────────────── */
+  
+  .loc-card {
+    padding: 10px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+  }
+  
+  .loc-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .loc-header i { font-size: 18px; color: #a78bfa; }
+  
+  #map {
+    width: 100%;
+    height: 180px;
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .loc-body { display: flex; flex-direction: column; gap: 4px; }
+  .loc-city  { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.1; }
+  .loc-region { font-size: 13px; color: #8899aa; }
+  
+  .loc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 20px;
+    padding: 10px 18px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    width: fit-content;
+  }
+  
+  .loc-btn:hover { background: rgba(255,255,255,0.14); }
+  
+  .loading-text { font-size: 13px; color: #8899aa; text-align: center; padding: 10px 0; }
+  
+  
+
+  @media (max-width: 320px) {
+  
+    .card {
+      width: 96%;
+      margin: 20px auto;
+      padding: 16px;
+      border-radius: 20px;
+    }
+  
+    .card::before { border-radius: 20px; }
+  
+    /* Header */
+    .top_header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 16px;
+    }
+  
+    .greet { gap: 12px; }
+    .icon  { height: 36px; width: 36px; font-size: 16px; }
+  
+    .greet_heading { font-size: 20px; }
+    .greet_pera    { font-size: 12px; }
+  
+    .Outer_status  { flex-wrap: wrap; gap: 8px; }
+    .status        { padding: 6px 12px; font-size: 13px; }
+    .battery       { padding: 6px 12px; font-size: 13px; gap: 8px; }
+    .status_current { font-size: 13px; }
+  
+    /* Card 2 — Clock */
+    .card2 { padding: 16px; border-radius: 20px; margin: 16px auto; }
+    .card2::before { border-radius: 20px; }
+  
+    .card2_top_heder { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .current_date    { font-size: 14px; }
+  
+    .card2_main { flex-direction: column; gap: 0; padding-top: 12px; }
+  
+    .current_time { font-size: 52px; }
+    .sec          { font-size: 46px; }
+  
+    .AmPm { flex-direction: row; font-size: 16px; gap: 10px; }
+  
+    /* Card 3 — Widget grid → single column */
+    .card3 { grid-template-columns: 1fr; gap: 14px; }
+  
+    /* Battery ring — smaller */
+    .battery-ring  { width: 110px; height: 110px; }
+    .battery-inner { width: 88px;  height: 88px; }
+    .innerCharger  { font-size: 20px; }
+    .card3battery1 { font-size: 16px; }
+  
+    .net-type    { font-size: 32px; }
+    .net-quality { font-size: 14px; }
+  
+    .w-city { font-size: 24px; }
+    .w-temp { font-size: 36px; }
+  
+    .loc-city   { font-size: 20px; }
+    #map        { height: 130px; }
+  
+    .w-city { font-size: 20px; }
+  }
+  
+  
+  /* ── 2. Mobile L  (321px – 425px) ───────────── */
+  @media (min-width: 321px) and (max-width: 425px) {
+  
+    .card {
+      width: 95%;
+      margin: 24px auto;
+      padding: 20px;
+      border-radius: 24px;
+    }
+  
+    .card::before { border-radius: 24px; }
+  
+    /* Header */
+    .top_header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding-bottom: 18px;
+    }
+  
+    .greet      { gap: 14px; }
+    .icon       { height: 40px; width: 40px; font-size: 18px; }
+  
+    .greet_heading { font-size: 26px; }
+    .greet_pera    { font-size: 13px; }
+  
+    .Outer_status { flex-wrap: wrap; gap: 10px; }
+    .status       { padding: 7px 14px; font-size: 14px; }
+    .battery      { padding: 7px 14px; font-size: 14px; gap: 10px; }
+    .status_current { font-size: 14px; }
+  
+    /* Clock */
+    .card2 { padding: 20px; border-radius: 24px; margin: 18px auto; }
+    .card2::before { border-radius: 24px; }
+  
+    .card2_top_heder { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .current_date    { font-size: 16px; }
+  
+    .card2_main   { flex-direction: column; padding-top: 16px; gap: 4px; }
+    .current_time { font-size: 72px; }
+    .sec          { font-size: 65px; }
+    .AmPm         { flex-direction: row; font-size: 20px; gap: 14px; }
+  
+    /* Widgets */
+    .card3 { grid-template-columns: 1fr; gap: 16px; }
+  
+    .battery-ring  { width: 130px; height: 130px; }
+    .battery-inner { width: 104px; height: 104px; }
+    .innerCharger  { font-size: 22px; }
+    .card3battery1 { font-size: 17px; }
+  
+    .net-type    { font-size: 38px; }
+    .net-quality { font-size: 15px; }
+  
+    .w-city { font-size: 26px; }
+    .w-temp { font-size: 40px; }
+  
+    .loc-city { font-size: 22px; }
+    #map      { height: 150px; }
+  }
+  
+  
+  /* ── 3. Tablet  (426px – 768px) ─────────────── */
+  @media (min-width: 426px) and (max-width: 768px) {
+  
+    .card {
+      width: 92%;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 30px;
+    }
+  
+    .card::before { border-radius: 30px; }
+  
+    /* Header */
+    .top_header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      padding-bottom: 22px;
+    }
+  
+    .greet_heading { font-size: 34px; }
+    .greet_pera    { font-size: 15px; }
+  
+    .Outer_status { flex-wrap: wrap; gap: 12px; }
+    .status       { padding: 8px 16px; font-size: 16px; }
+    .battery      { padding: 8px 16px; font-size: 16px; }
+    .status_current { font-size: 16px; }
+  
+    /* Clock */
+    .card2 { padding: 30px; border-radius: 30px; margin: 22px auto; }
+    .card2::before { border-radius: 30px; }
+  
+    .current_date { font-size: 20px; }
+  
+    .card2_main   { padding-top: 20px; }
+    .current_time { font-size: 100px; }
+    .sec          { font-size: 90px; }
+    .AmPm         { font-size: 26px; }
+  
+    /* Widgets → 2 columns */
+    .card3 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  
+    .battery-ring  { width: 150px; height: 150px; }
+    .battery-inner { width: 120px; height: 120px; }
+    .innerCharger  { font-size: 25px; }
+  
+    .w-city { font-size: 30px; }
+    .w-temp { font-size: 46px; }
+  
+    .loc-city { font-size: 24px; }
+    #map      { height: 160px; }
+  }
+  
+  
+  /* ── 4. Laptop  (769px – 1024px) ────────────── */
+  @media (min-width: 769px) and (max-width: 1024px) {
+  
+    .card {
+      width: 90%;
+      margin: 60px auto;
+      padding: 36px;
+      border-radius: 40px;
+    }
+  
+    .card::before { border-radius: 40px; }
+  
+    .greet_heading { font-size: 36px; }
+    .greet_pera    { font-size: 16px; }
+  
+    .status_current { font-size: 18px; }
+    .status  { padding: 8px 18px; font-size: 18px; }
+    .battery { padding: 8px 18px; font-size: 18px; }
+  
+    /* Clock */
+    .card2 { padding: 36px; border-radius: 40px; }
+    .card2::before { border-radius: 40px; }
+  
+    .current_date { font-size: 22px; }
+    .current_time { font-size: 120px; }
+    .sec          { font-size: 108px; }
+    .AmPm         { font-size: 28px; }
+  
+    /* Widgets → 2 columns */
+    .card3 { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  
+    .w-city { font-size: 34px; }
+    .w-temp { font-size: 48px; }
+  }
+  
+  
+  /* ── 5. Desktop  (1025px – 1440px) ──────────── */
+  /* Base styles already handle 1440px+.
+     This block fine-tunes the mid-range desktop. */
+  @media (min-width: 1025px) and (max-width: 1440px) {
+  
+    .card {
+      width: 80%;
+      margin: 80px auto;
+      padding: 44px;
+    }
+  
+    .greet_heading { font-size: 40px; }
+    .current_time  { font-size: 150px; }
+    .sec           { font-size: 135px; }
+  
+    /* Widgets stay at 4 columns */
+    .card3 { grid-template-columns: repeat(4, 1fr); }
+  }

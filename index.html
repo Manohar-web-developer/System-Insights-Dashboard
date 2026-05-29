@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+</head>
+
+<body>
+
+  <div class="bg">
+
+    <div class="card">
+      <div class="top_header">
+        <div class="greet">
+          <div class="icon">
+            <i class="fa-regular fa-sun"></i>
+          </div>
+          <div class="greet_message">
+            <div class="greet_heading" id="greet">
+
+            </div>
+            <div class="greet_pera">
+            </div>
+          </div>
+        </div>
+        <div class="Outer_status">
+          <div class="status">
+            <div class="status_icon active" id="status_icon"></div>
+            <div class="status_current" id="status_current"> Online</div>
+          </div>
+          <div class="battery">
+            <div class="battery_status">
+
+            </div>
+            <div class="battery-charge" id="battery-charge">78%</div>
+          </div>
+        </div>
+      </div>
+      <div class="card2">
+        <div class="card2_top_heder">
+          <div class="date_filter">
+            <div class="icon">
+              <i class="fa-regular fa-calendar"></i>
+            </div>
+            <div class="current_date" id="date">
+
+            </div>
+          </div>
+          <div class="day_filter">
+            <div class="status daystatus" id="day"></div>
+          </div>
+        </div>
+        <div class="card2_main">
+          <div class="current_time">
+            <span id="current_time"></span>
+
+            <span class="sec" id="sec"></span>
+          </div>
+          <div class="AmPm">
+            <h2 class="activeh2" id="am">AM</h2>
+            <h2 id="pm">PM</h2>
+          </div>
+        </div>
+      </div>
+      <div class="card3">
+        <div class="crd3mini">
+          <div class="card3battery">
+            <div class="battery_status">
+
+            </div>
+            <div class="card3battery1">Battery</div>
+          </div>
+          <div class="charginLevel">
+            <div class="charginChart">
+              <div class="battery-ring">
+
+                <div class="battery-inner">
+
+                  <h2 class="battery-charge innerCharger">78%</h2>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="chargingStatus">
+              <div class="ifcharging green"> </div>
+              <div class="batteryHealth">
+                Health: Good
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="crd3mini" id="network-card">
+          <div class="net-card">
+            <div class="net-header">
+              <i class="fa-solid fa-wifi"></i>
+              Network
+            </div>
+
+            <svg width="250" height="150" viewBox="0 0 190 105">
+              <defs>
+                <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#00d9ff" />
+                  <stop offset="50%" stop-color="#7a5cff" />
+                  <stop offset="100%" stop-color="#ff4fd8" />
+                </linearGradient>
+              </defs>
+
+              <!-- Background arc -->
+              <path d="M 15 100 A 80 80 0 0 1 175 100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12"
+                stroke-linecap="round" />
+
+              <!-- Gradient arc -->
+              <path d="M 15 100 A 80 80 0 0 1 175 100" fill="none" stroke="url(#arcGrad)" stroke-width="12"
+                stroke-linecap="round" />
+            </svg>
+
+            <div class="net-center">
+              <div class="net-type"></div>
+              <div class="net-quality"></div>
+            </div>
+
+            <div class="net-status">
+              <div class="dot"></div>
+              <h2 class="net-status2">Strong Connection</h2>
+            </div>
+
+
+          </div>
+
+        </div>
+        <div class="crd3mini">
+          <div class="weather-card">
+            <div class="w-header">
+              <i class="ti ti-cloud" aria-hidden="true"></i>
+              Weather
+            </div>
+            <div class="w-city">Please allow Location</div>
+            <div class="w-main">
+              
+              <div class="w-left">
+                <div class="w-temp"></div>
+                <div class="w-desc"></div>
+                
+              </div>
+              <div class="w-icon">
+                <div class="sun"></div>
+                <div class="cloud-back"></div>
+                <div class="cloud-front"></div>
+              </div>
+            </div>
+          
+            <div class="w-footer">
+              <div class="w-pill-h"></div>
+              <div class="w-pill-l"></div>
+            </div>
+          </div>
+        </div>
+        <div class="crd3mini">
+          <div class="loc-card">
+
+            <div class="loc-header">
+              <i class="ti ti-map-pin" aria-hidden="true"></i>
+              Location
+            </div>
+          
+            <div id="map"></div>
+          
+            <div class="loc-body">
+              <div class="loc-city"  id="loc-city">Detecting...</div>
+              <div class="loc-region" id="loc-region">Please allow location</div>
+            </div>
+          
+            <button class="loc-btn" id="map-btn" onclick="openMap()">
+              <i class="ti ti-navigation" aria-hidden="true"></i>
+              View on Map
+            </button>
+          
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="scripte.js"></script>
+</body>
+
+</html>
